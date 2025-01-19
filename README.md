@@ -39,6 +39,31 @@
          - D --firebase deploy command 
            - used to deploy after running many files
            - gets Hosting URL where application is hosted can copy that url nd chcek into browsers we'll get our application
+
+- create SignUp user account - LOgin.js BtnClick
+      - taken all code from firebase docz authentication with email
+      - added auth to firebase.js taken from firebase docs authentication.
+      - SIGN-UP:- added createUserWithEmailPass code from docs also set error occuring in api to errorMessage to render on UI as well
+      - SIGN-IN:- added SignInWithEmailPass code from docs to sign in logic set error as above 
+
+- Redux store
+   - command npm i -d @reduxjs/tool & react-redux
+   - created appStore.js in utils nd configure store
+   - created userSlice.js in utils nd created slice with name , initialState, reducers as addUser & removeUser
+   - now need to store data to store so in all places signUp/in we need to dispatch instead of that did on root-level i.e., Body 
+   - used onAuthStateChanged from firebase docs to execute whenever any authentication happens - signin/out/up etc
+   - added onAuthStateChanged in useEffect with [] dependency want only one time nd will autimatically call for every authentication
+   - now once we signUp/In we need to navigate to "/browse but in body we have routing so can't use navigate there need to use in child
+   - in Login.js we did navigate once we signUP/In
+
+   - UpdatedProfile:- got again from fire docs and updated displayName nd photoUrl
+   - nd updated then block got all details like uid, email, pass, name, url from auth.current coz dipstach in body dispatch before update update name nd url so we get both of that as null to avoid we disptach in ten of updated to get every detail
+
+
+
+
+
+ReduxStore,slice, onAuthStateChnage inside useEffect in body to handle authentications(signUp/In/Out), Header when user then icon nd signOut also updated profile in Login to add displayName nd photoURL.
             
 
 
