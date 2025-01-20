@@ -59,11 +59,17 @@
    - UpdatedProfile:- got again from fire docs and updated displayName nd photoUrl
    - nd updated then block got all details like uid, email, pass, name, url from auth.current coz dipstach in body dispatch before update update name nd url so we get both of that as null to avoid we disptach in ten of updated to get every detail
 
+   # Bug fixing - signUp user displayName & photoURL updtae / if user not logged in redirect to login page vice-versa
+
+   - initially onAuthStateChanged is in body of useEffect and in body we have routes so can't use navigate also name nd url was not getting updtaed coz its taking time until that it execute nd get it as null 
+   - To resolve this we kept onAuthStateChanged to Header.js which will be there in all places nd also child of router so can use navigate nd there when we have user we navigated to "/browse" else to "/" i.e., login page 
 
 
 
 
-ReduxStore,slice, onAuthStateChnage inside useEffect in body to handle authentications(signUp/In/Out), Header when user then icon nd signOut also updated profile in Login to add displayName nd photoURL.
+
+
+
             
 
 
