@@ -5,6 +5,8 @@ import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPasswo
 import { auth } from '../Utils/firebase';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../Utils/userSlice';
+import { NETFLIX_BG } from '../Utils/constants';
+import { USER_AVATAR } from '../Utils/constants';
 
 
 const Login = () => {
@@ -51,7 +53,7 @@ const Login = () => {
             // update profile
              updateProfile(user, {
                 displayName: name.current.value, 
-                photoURL: "https://avatars.githubusercontent.com/u/100147149?s=400&u=171c315b01b4f038efc38d3c35785a976147549e&v=4"
+                photoURL:USER_AVATAR
               }).then(() => {
                 // Profile updated!
                 console.log("obj: ",user)
@@ -103,7 +105,7 @@ const Login = () => {
     <div>
         <Header/>
         <div className='absolute'>
-           <img src='https://assets.nflxext.com/ffe/siteui/vlv3/e3e9c31f-aa15-4a8f-8059-04f01e6b8629/web/IN-en-20250113-TRIFECTA-perspective_febfa442-23d9-45f3-937e-72f8b971f7a9_small.jpg' alt='netflixBg'/>
+           <img src={NETFLIX_BG} alt='netflixBg'/>
         </div>
         <div>
           {/* absolute-overlap element, right/left-0-> center elment bg-opacity-> make bg transperant */}

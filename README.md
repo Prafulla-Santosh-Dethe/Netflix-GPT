@@ -64,6 +64,18 @@
    - initially onAuthStateChanged is in body of useEffect and in body we have routes so can't use navigate also name nd url was not getting updtaed coz its taking time until that it execute nd get it as null 
    - To resolve this we kept onAuthStateChanged to Header.js which will be there in all places nd also child of router so can use navigate nd there when we have user we navigated to "/browse" else to "/" i.e., login page 
 
+   # unsubcribe is return by  onAuthStateChanged
+
+   - needed coz its listner it stay active once register.
+   - if we didn't unsubcribe it keeps running in bg even if compo unmount which causes unexpected behaviour might responde to chnages which leads bugs nd error so its needed
+
+   - useEffect return is used to return fun to cleanup code.
+
+   # constants.js
+   - added all img url's nd export nd used it all over compo 
+
+
+
 
 
 
