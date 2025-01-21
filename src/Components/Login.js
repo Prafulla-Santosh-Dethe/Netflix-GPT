@@ -43,20 +43,21 @@ const Login = () => {
 
       // SignIn/SignUp ne register user to firebase
       if(!isSignInForm){
+        //console.log("signUp:")
         // SignUp logic
         createUserWithEmailAndPassword(
         auth, email.current.value, password.current.value)
           .then((userCredential) => {
             // Signed up 
             const user = userCredential.user;
-
+          //   console.log("signUp creatrUser: ",user) 
             // update profile
              updateProfile(user, {
                 displayName: name.current.value, 
                 photoURL:USER_AVATAR
               }).then(() => {
                 // Profile updated!
-                console.log("obj: ",user)
+            //    console.log("signUp then-update: ",user)
                 
                 // dispatch here so store get updated with name nd url - from auth we get current user with complete detail
                 // if we did dispatch from body it execute before updatingProfile so nam end url goes as null thats why dispatch here
@@ -89,7 +90,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
-          console.log("SignIn: ",user);
+          //console.log("SignIn: ",user);
           //navigate("/browse")
           // ...
         })
@@ -100,7 +101,7 @@ const Login = () => {
         });
       }
   }
-
+//console.log("login step")
   return (
     <div>
         <Header/>

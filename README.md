@@ -74,6 +74,50 @@
    # constants.js
    - added all img url's nd export nd used it all over compo 
 
+   # TMDB API
+   - profile-> settings-->api & created app to TMDB nd get access key nd token
+   - same eplace get docs click on that -> API references -> Now playing -> select js as lan
+   - copy fetch request obj nd paste in constant.js 
+   - now make fun to call api in Brose use async -await fetch(from same docs)
+   convert to json nd log
+   - log comes twice due to react-strict mode in index.js which happens only in local not in production coz react do extra render to check in-consistency in calls nd if nay through error
+
+   # Browse Layout:- 
+       - Main-Container
+           - bg-video
+           - videoTitle
+       - Secondary-container
+           -movies lists horizontal scroll
+
+   # Browse page :-  custom hooks created, bg-video nd its title-description
+   - useNowPlayingMovies taken fetch from TMDP js nd once recived data.json() disptach action of "addNowPlayingMovies(json.results())" which conatin movies list that stored in "nowPlayingMovie" sttae in movieSlice
+   - Browse page called customHook useNowPlaying nd in browse we have Header, mainContainer & secondaryContainer
+   
+   - Main-Container:- now from useNowPlaying hook we dispatch nd store movies in store now want to get so we can send its detail to main container.  got nowPlayingMovies from store as [store.results?.nowPlayingMovies].
+      - if movies===null retrun to avoid error
+      - else retrive title, overview, id to send to bg-video nd videotitle 
+
+      - VideoTitle:- received title nd overview in props nd used it in h1 & para nd in div created two btn PlayNow & moreInfo.
+
+      - bg-video:- now the list of movies we store don't have movie video.
+         - getVideo 1st :- TMDB --> Api--> Movies--> video paste id nd get fetch same as previously we got.
+        
+         - create one more hook "useMovieTrailer" to fetch trailer/video of movie
+             - fetch gives data.json() filetr it based on type==trailer [const filterData = json.results.filter(video => video.type==="Trailer")]
+             - it can get multiple results but we want to play single video in bg so:-  const trailer = (filterData.length ? filterData[1]: json.results[0].type)
+             - now we can either craete state to store trailer or can use store so we used store.
+             - created one more action addTrailerVideo & initila state as trailerVideo:null.
+             - nd siptach from hook. 
+
+         - now in bg-video we want trailer saved in store :- const trailerVideo = useSelector(store=>store.movies?.trailerVideo)
+         - call customHook:- usemovieTrailer();
+
+         - in return we need to play video:- 
+             - when we get movies listed based on trailer there we get key in movie detail copy it nd open youtube any video after watch paste key --> go to share--> embed copy iframe
+             - paste iframe in bg-video return.
+             - in iframe src after embed we have to add our trailer.key so it play that particular video.
+             - src={"https://www.youtube.com/embed/"+ trailerVideo?.key+"?autoplay=1"} autoplay for playing it automatically.
+                 
 
 
 

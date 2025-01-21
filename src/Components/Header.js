@@ -12,22 +12,24 @@ const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
-  console.log("data: ",user);
+  //console.log("data: ",user);
 
    // set up thid to once
   //  kept here instead of Body coz 1-> bug when we redirect to "/brose"
   // its was rediecting without user so need to make sure that onAuthStateChange if user then only browse else "/" login
   // but as body has route can't use navigate so we need to put onAuth to somewhere which will available to all compo i.e, Hedaer
 
+  //console.log("step-2: ",user)
    useEffect(()=>{
-    console.log("useEffect")
+    //console.log("HeaderUseEffect: useEffect")
      const unsubcribe =  onAuthStateChanged(auth, (user) => {
           if (user) {
+            //console.log("Hedaer-user in OnAut: ",user, ": ",user.uid)
             // User is signed in, see docs for a list of available properties
             // https://firebase.google.com/docs/reference/js/auth.user
             //const uid = user.uid;
             const {uid,email, displayName, photoURL } = user
-            console.log("URL:",photoURL)
+            //console.log("URL:",photoURL)
             dispatch(addUser({
               uid:uid,
               email:email,
@@ -37,6 +39,7 @@ const Header = () => {
           
             navigate("/browse") //signin redirect to browse page
           } else {
+            //console.log("Auth no user: ",user)
             // User is signed out no use of action so not passed anything
             dispatch(removeUser());
             navigate("/") //singout so main page
@@ -45,11 +48,12 @@ const Header = () => {
 
         // cleaning code
         // unsubcribe calls when compo unmount
-        return () => unsubcribe();
+         return () => unsubcribe();
   },[])
 
   const handleSignOut = () =>{
     signOut(auth).then(() => {
+
       // Sign-out successful.
       navigate("/")
 
@@ -66,8 +70,8 @@ const Header = () => {
         alt='netflixLogo'/>
 
        { user && <div className='flex'>
-          <img className='w-16 h-14 p-2 m-2' src={USER_AVATAR} alt='userIcon'/>
-          <button onClick={handleSignOut} className='w-24 h-10 my-4 mx-2 cursor-pointer text-white font-bold border-2 rounded-md border-black '>Sign Out</button>
+          <img className='w-16 h-14 p-2 m-1' src={USER_AVATAR} alt='userIcon'/>
+          <button onClick={handleSignOut} className='w-24 h-10 my-4 mx-1 cursor-pointer text-white font-bold border-2 rounded-md border-black opacity-65 '>Sign Out</button>
         </div>}
     </div>
   )
