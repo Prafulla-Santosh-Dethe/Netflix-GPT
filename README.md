@@ -118,6 +118,25 @@
              - in iframe src after embed we have to add our trailer.key so it play that particular video.
              - src={"https://www.youtube.com/embed/"+ trailerVideo?.key+"?autoplay=1"} autoplay for playing it automatically.
                  
+    - Secondary-container :- have MovieList.js with props as title nd movies 
+         - MovieList :- h1- title
+         - div [overflow-x-scroll(horizontal scroll) scrollbar-hidden(written in index.css to hide scrollBar)]-> 
+           div ->{movies(props).map <MovieCard imgPath={movie.poster_path}>} --> path to get img for cards
+         - MovieCard:- contant.js :-paste path [google TMDP img path in Guides-image we get it]
+              - <img src={IMG_CDN_URL + imgPath} alt='movieCard'/> concatID with path to get that id img
+
+         - in 2nd-container there are multiple movieList like noPlaying, Upcomg, topRated, popular
+         - from api refrences we get fetch url for diff movies above mention
+         - craeted cutom hooks for upcomg, topRated, popular , nowPlaying already created nd fetch corresponding urls from TMDB
+         - Created actions nd initial states for evry movie category in movieSlice nd export action
+         - from created hook dispatch there corresponding action with json.results
+         - in browse call all custom hook so all will dispatch action nd push movies fetch to store
+         - In 2nd-container get movies from useSelector - const movies = useSelector(store=>store.movies) nd pass to MovieList like below
+         -  <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies}/>
+            <MovieList title={"Top Rtaed"} movies={movies.topRatedMovies}/>
+            <MovieList title={"Popular"} movies={movies.popularMovies}/>
+            <MovieList title={"Upcoming"} movies={movies.upcomingMovies}/>
+                            
 
 
 

@@ -3,6 +3,9 @@ import Header from './Header'
 import useNowPlayingMovies from '../customHooks/useNowPlayingMovies.js'
 import MainContainer from './MainContainer.js';
 import SecondaryContainer from './SecondaryContainer.js';
+import usePopularMovies from '../customHooks/usePopularMovies.js';
+import useTopRatedMovies from '../customHooks/useTopRatedMovies.js';
+import useUpcomingMovies from '../customHooks/useUpcomingMovies.js';
 //import { APT_OPTIONS } from '../Utils/constants';
 // import { useDispatch } from 'react-redux';
 // import { addNowPlayingMovies } from '../Utils/movieSlice';
@@ -29,9 +32,12 @@ const Browse = () => {
 
    useNowPlayingMovies();
    //console.log("data: ")
+   usePopularMovies();
+   useTopRatedMovies();
+   useUpcomingMovies();
 
   return (
-    <div>
+    <div className='w-full overflow-x-hidden'>
       <Header/>
       <MainContainer/>
       <SecondaryContainer/>

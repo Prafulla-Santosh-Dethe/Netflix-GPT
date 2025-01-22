@@ -7,19 +7,20 @@ import VideoTitle from './VideoTitle'
 const MainContainer = () => {
 
     const movies = useSelector((store) =>store.movies?.nowPlayingMovies)
-   // console.log("mainContain :",movies)
+   //console.log("mainContain :",movies)
 
     if(movies===null) return;
     //console.log("mainContain-m2: ",movies)
     
-    const mainMovie = movies[0];
+    // by choice index-2 to get Mufasa trailer
+    const mainMovie = movies[2];
     //console.log("mainContain-main: ",mainMovie);
 
     const {original_title, overview,id} = mainMovie;
    // console.log("mainContain-datahere: ",original_title," ",overview)
     
     return (
-    <div>
+    <div className='w-full overflow-x-hidden'> 
         <VideoTitle title={original_title} overview={overview}/>
         <VideoBackground movieId={id}/>
     </div>

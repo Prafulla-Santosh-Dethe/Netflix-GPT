@@ -41,8 +41,8 @@ const VideoBackground = ({movieId}) => {
   console.log(trailerVideo?.key)
   useMovieTrailer(movieId);
   return (
-    <div className='w-screen'>
-      <iframe className='w-screen h-[700px]'
+    <div className='w-screen' >
+      <iframe className='w-screen h-[780px]'
       // src={"https://www.youtube.com/embed/"+trailerId}
 
       src={"https://www.youtube.com/embed/"+ trailerVideo?.key+"?autoplay=1"}

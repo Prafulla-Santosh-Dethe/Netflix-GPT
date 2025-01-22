@@ -1,10 +1,14 @@
+import { Upcoming } from "@mui/icons-material";
 import { createSlice } from "@reduxjs/toolkit";
 
 const movieSlice = createSlice({
     name:"movies",
     initialState:{
         nowPlayingMovies:null,
-        trailerVideo:null
+        trailerVideo:null,
+        popularMovies:null,
+        topRatedMovies:null,
+        upcomingMovies:null
     },
 
     reducers:{
@@ -15,9 +19,20 @@ const movieSlice = createSlice({
 
         addTrailerVideo:(state, action)=>{
             state.trailerVideo = action.payload
+        },
+
+        addPopularMovies:(state, action)=>{
+            state.popularMovies = action.payload
+        },
+        addTopRatedMovie:(state,action)=>{
+            state.topRatedMovies = action.payload;
+        },
+        addUpcomingMovies:(state,action)=>{
+            state.upcomingMovies = action.payload;
         }
+
     }
 });
 
-export  const {addNowPlayingMovies, addTrailerVideo} = movieSlice.actions;
+export  const {addNowPlayingMovies, addTrailerVideo,addPopularMovies, addTopRatedMovie, addUpcomingMovies} = movieSlice.actions;
 export default movieSlice.reducer;

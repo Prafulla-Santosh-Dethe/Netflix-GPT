@@ -22,7 +22,7 @@ const Body = () => {
 
     //console.log("step-1: body")
   return (
-    <div>
+    <div className='w-full overflow-x-hidden'>
        <RouterProvider router={appRouter} /> 
     </div>
   )
