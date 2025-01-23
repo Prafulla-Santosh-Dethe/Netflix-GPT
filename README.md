@@ -136,6 +136,35 @@
             <MovieList title={"Top Rtaed"} movies={movies.topRatedMovies}/>
             <MovieList title={"Popular"} movies={movies.popularMovies}/>
             <MovieList title={"Upcoming"} movies={movies.upcomingMovies}/>
+
+   # GPT-SERACH 
+      - GptSerach.js :- bg-img same as loginPage one , <GptSerachBar/> & <GptMovieSuggestions/>  
+      - GptSerachBar :- div-form - 1. input placeholder({lang[langKey].gptSearchPlaceholder}) nd btn({lang[langKey].search}) this is language filter which added
+
+      - changeLanguage of gpt page:- Language.js in constants nd add en, hindi & spanish with key-value of serach nd placeholder
+      - craeted cutomHook configSlice to store selected lang in store with initial state as en nd redcerAction:-changeLanguage added key to appStore as well.
+      - now created lan but need btn to header so user can select from that nd it'll be dropdown with options nd only visible in gptPage 
+      -  const showGptSerach = useSelector(store => store.gpt.showGptSerach) if we get gpt as true then only dropdown
+      - {showGptSerach && 
+             <select className=' my-3 mx-1 p-1 h-11 rounded-lg w-28 cursor-pointer bg-purple-400 opacity-65 text-white font-bold ' onChange={handleLanguageChange}>
+             {SUPPORTED_LANGUAGES.map(lang =>
+               <option key={lang.identifier} value={lang.identifier}>
+                {lang.name}
+                </option>
+              )}
+            </select>
+          }
+      - SUPPORTED_LANGUAGES :- export const SUPPORTED_LANGUAGES = [
+                              {identifier:"en", name:"English"},
+                              {identifier:"hindi",name:"Hindi"}, 
+                              {identifier:"spanish",name:"Spanish"}
+                              ] 
+      - onChnage method use to dispatch changelanuage action of configSlice
+           const handleLanguageChange = (e)=>{
+               console.log(e.target.value); //get user slected val from event-e
+               dispatch(changeLanguage(e.target.value))
+           }                           
+                     
                             
 
 

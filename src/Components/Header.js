@@ -6,12 +6,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { addUser, removeUser } from '../Utils/userSlice'
 import { onAuthStateChanged } from 'firebase/auth'
-import { NETFLIX_LOGO, netflixLogo, USER_AVATAR } from '../Utils/constants'
+import { NETFLIX_LOGO, netflixLogo, SUPPORTED_LANGUAGES, USER_AVATAR } from '../Utils/constants'
+import { toggleGptSerachView } from '../Utils/gptSlice'
+import lang from '../Utils/languageConstants'
+import { changeLanguage } from '../Utils/configSlice'
 const Header = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
+  const showGptSerach = useSelector(store => store.gpt.showGptSerach)
   //console.log("data: ",user);
 
    // set up thid to once
@@ -62,6 +66,16 @@ const Header = () => {
       navigate("/error")
     });
   }
+
+  const handleGptSearch = () =>{
+    // toggle gpt-search
+    dispatch(toggleGptSerachView())
+  }
+
+  const handleLanguageChange = (e)=>{
+     console.log(e.target.value);
+     dispatch(changeLanguage(e.target.value))
+  }
   //console.log(user.photoURL)
   return ( 
     // absolute-> overlap element, z-10 make this elemnt to appear on top gradient gives effect from top to bottom gets lighter
@@ -70,8 +84,18 @@ const Header = () => {
         alt='netflixLogo'/>
 
        { user && <div className='flex'>
+          {showGptSerach && 
+             <select className=' my-3 mx-1 p-1 h-11 rounded-lg w-28 cursor-pointer bg-purple-400 opacity-65 text-white font-bold ' onChange={handleLanguageChange}>
+             {SUPPORTED_LANGUAGES.map(lang =>
+               <option key={lang.identifier} value={lang.identifier}>
+                {lang.name}
+                </option>
+              )}
+            </select>
+          }
+          <button onClick={handleGptSearch} className='w-28 h-11 my-3 mx-1 p-1 cursor-pointer text-white font-bold border-2 rounded-md border-black bg-purple-400 opacity-65 '>{showGptSerach?"Homepage":"GPT Serach"}</button>
           <img className='w-16 h-14 p-2 m-1' src={USER_AVATAR} alt='userIcon'/>
-          <button onClick={handleSignOut} className='w-24 h-10 my-4 mx-1 cursor-pointer text-white font-bold border-2 rounded-md border-black opacity-65 '>Sign Out</button>
+          <button onClick={handleSignOut} className='w-24 h-11 my-3 mx-1 cursor-pointer text-white font-bold border-2 rounded-md bg-red-500 border-black opacity-65 '>Sign Out</button>
         </div>}
     </div>
   )

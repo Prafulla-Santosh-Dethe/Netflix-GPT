@@ -38,7 +38,7 @@ const VideoBackground = ({movieId}) => {
   // useEffect(()=>{
   //     getMovieTrailer();
   // },[])
-  console.log(trailerVideo?.key)
+  //console.log(trailerVideo?.key)
   useMovieTrailer(movieId);
   return (
     <div className='w-screen' >

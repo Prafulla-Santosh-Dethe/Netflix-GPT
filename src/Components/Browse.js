@@ -6,11 +6,14 @@ import SecondaryContainer from './SecondaryContainer.js';
 import usePopularMovies from '../customHooks/usePopularMovies.js';
 import useTopRatedMovies from '../customHooks/useTopRatedMovies.js';
 import useUpcomingMovies from '../customHooks/useUpcomingMovies.js';
+import GptSerach from './GptSerach.js';
+import { useSelector } from 'react-redux';
 //import { APT_OPTIONS } from '../Utils/constants';
 // import { useDispatch } from 'react-redux';
 // import { addNowPlayingMovies } from '../Utils/movieSlice';
 
 const Browse = () => {
+  console.log("browse")
 
   // fetch daya from TMDB api nd update store
   // const dispatch = useDispatch();
@@ -30,6 +33,8 @@ const Browse = () => {
   //   getNowPlayingMovies();
   // },[])
 
+  const showGptView = useSelector(store=>store.gpt.showGptSerach);
+  console.log(showGptView)
    useNowPlayingMovies();
    //console.log("data: ")
    usePopularMovies();
@@ -37,10 +42,17 @@ const Browse = () => {
    useUpcomingMovies();
 
   return (
+    
     <div className='w-full overflow-x-hidden'>
+      {console.log(showGptView)}
       <Header/>
-      <MainContainer/>
-      <SecondaryContainer/>
+      {showGptView ? (<GptSerach/>):(
+        // multiple compo react-fragment to keep one parent for them else not able to keep
+          <>
+             <MainContainer/>
+             <SecondaryContainer/>
+          </>
+      )}
 
       {/* 
          MainContainer
